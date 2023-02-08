@@ -14,13 +14,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
-@InstallIn (SingletonComponent::class)
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Provides
-    fun providesItunesAPI(retrofit: Retrofit) : ItunesAPI {
-        return retrofit.create(ItunesAPI::class.java)
-    }
+    fun providesMoshi(): Moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
     @Provides
     fun providesRetrofit(
@@ -51,10 +52,8 @@ class NetworkModule {
         }
     }
 
-
     @Provides
-    fun providesMoshi(): Moshi =
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
+    fun providesItunesAPI(retrofit: Retrofit) : ItunesAPI {
+        return retrofit.create(ItunesAPI::class.java)
+    }
 }

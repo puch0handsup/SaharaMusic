@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.saharamusic.R
 import com.example.saharamusic.databinding.FragmentGenreCommonViewBinding
+import com.example.saharamusic.model.Song
+import com.example.saharamusic.model.SongResponse
 import com.example.saharamusic.utils.BaseFragment
+import com.example.saharamusic.utils.UIState
 import javax.inject.Inject
 
 private const val TAG = "HouseFragment"
@@ -26,7 +29,19 @@ class HouseFragment : BaseFragment() {
         // Inflate the layout for this fragment
 
         Log.d(TAG, "onCreateView: ")
+        saharaViewModel.houseSongs.observe(viewLifecycleOwner) { state ->
+            when(state){
+                is UIState.LOADING -> {}
+                is UIState.SUCCESS<SongResponse> -> {
+                    Log.d(TAG, "onCreateView: ${state.response}")
+                }
+                is UIState.ERROR -> {
+                    showError(state.error.localizedMessage) {
 
+                    }
+                }
+            }
+        }
 
 
         return binding.root

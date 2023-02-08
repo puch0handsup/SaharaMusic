@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 open class BaseFragment : Fragment(){
 
-    protected val starWarsViewModel: SaharaViewModel by lazy {
+    protected val saharaViewModel: SaharaViewModel by lazy {
         ViewModelProvider(requireActivity())[SaharaViewModel::class.java]
     }
 

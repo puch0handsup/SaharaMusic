@@ -8,14 +8,23 @@ import retrofit2.http.QueryMap
 
 interface ItunesAPI {
 
-    @GET
+    @GET(SEARCH)
     suspend fun getListByGenre(
-        @QueryMap options: Map<String, String>
-    ) : Response<SongResponse>
+        @Query("term") term: String,
+        @Query("amp;media") media: String,
+        @Query("amp;entity") entity: String,
+        @Query("amp;limit") limit: String,
+        ) : Response<SongResponse>
+
+//    @GET(SEARCH)
+//    suspend fun getListByGenre(
+//        @QueryMap options: Map<String, String>
+//    ) : Response<SongResponse>
 
     // https://itunes.apple.com/search?term=rock&amp;media=music&amp;entity=song&amp;limit=50
 
     companion object {
-        const val BASE_URL = "https://itunes.apple.com/search"
+        const val BASE_URL = "https://itunes.apple.com/"
+        private const val SEARCH = "search"
     }
 }
