@@ -21,7 +21,7 @@ class SaharaRepositoryImpl @Inject constructor(
     override fun getListByGenre(term: String): Flow<UIState<SongResponse>> = flow {
         emit(UIState.LOADING)
         try {
-            val response = itunesAPI.getListByGenre(term, "music", "song", "50")
+            var response = itunesAPI.getListByGenre()
             if (response.isSuccessful){
                 response.body()?.let {
                     Log.d(TAG, "getListByGenre: $it")
@@ -30,14 +30,15 @@ class SaharaRepositoryImpl @Inject constructor(
             } else
                 throw FailureResponse(response.errorBody()?.string())
         }catch (e: Exception) {
+            Log.e(TAG, "getListByGenre: $e", )
             emit(UIState.ERROR(e))
         }
     }
 
-//    override fun getListByGenre(options: Map<String, String>): Flow<UIState<SongResponse>> = flow {
+//    override fun getListByGenre(genre: Map<String, String>): Flow<UIState<SongResponse>> = flow {
 //        emit(UIState.LOADING)
 //        try {
-//            val response = itunesAPI.getListByGenre(options)
+//            val response = itunesAPI.getListByGenre(genre)
 //            if (response.isSuccessful){
 //                response.body()?.let {
 //                    Log.d(TAG, "getListByGenre: $it")
