@@ -1,13 +1,10 @@
 package com.example.saharamusic.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
+import com.google.gson.annotations.SerializedName
 data class SongResponse(
-    @Json(name = "resultCount")
+    @SerializedName("resultCount")
     val resultCount: Int? = null,
-    @Json(name = "results")
+    @SerializedName("results")
     val results: List<Song>? = null
 )

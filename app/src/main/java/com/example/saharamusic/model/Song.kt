@@ -1,20 +1,18 @@
 package com.example.saharamusic.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 import retrofit2.http.Url
 
-@JsonClass(generateAdapter = true)
 data class Song(
-    @Json(name = "artistName")
+    @SerializedName("artistName")
     val artistName: String? = null,
-    @Json(name = "artworkUrl60")
+    @SerializedName("artworkUrl60")
     val artworkUrl60: String? = null,
-    @Json(name = "collectionArtistName")
+    @SerializedName("collectionArtistName")
     val collectionName: String? = null,
-    @Json(name = "trackPrice")
+    @SerializedName("trackPrice")
     val trackPrice: Double? = null,
-    @Json(name = "previewUrl")
+    @SerializedName("previewUrl")
     val previewUrl: Url? = null
 )

@@ -1,8 +1,6 @@
 package com.example.saharamusic.di
 
 import com.example.saharamusic.rest.ItunesAPI
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -18,19 +16,12 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
 
     @Provides
-    fun providesMoshi(): Moshi =
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
-    @Provides
     fun providesRetrofit(
-        moshi: Moshi,
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ItunesAPI.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
     }

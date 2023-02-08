@@ -11,9 +11,9 @@ interface ItunesAPI {
     @GET(SEARCH)
     suspend fun getListByGenre(
         @Query("term") term: String,
-        @Query("amp;media") media: String,
-        @Query("amp;entity") entity: String,
-        @Query("amp;limit") limit: String,
+        @Query("amp;media", encoded = true) media: String,
+        @Query("amp;entity", encoded = true) entity: String,
+        @Query("amp;limit", encoded = true) limit: String,
         ) : Response<SongResponse>
 
 //    @GET(SEARCH)
@@ -22,7 +22,7 @@ interface ItunesAPI {
 //    ) : Response<SongResponse>
 
     // https://itunes.apple.com/search?term=rock&amp;media=music&amp;entity=song&amp;limit=50
-
+    // https://itunes.apple.com/search?term=house&amp;media=music&amp;entity=song&amp;limit=50
     companion object {
         const val BASE_URL = "https://itunes.apple.com/"
         private const val SEARCH = "search"
