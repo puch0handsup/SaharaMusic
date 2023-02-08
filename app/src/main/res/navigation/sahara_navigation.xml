@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sahara_navigation"
+    app:startDestination="@id/house_fragment">
+
+    <fragment
+        android:id="@+id/house_fragment"
+        android:name="com.example.saharamusic.view.genres.house.HouseFragment"
+        android:label="TOP 50 HOUSE">
+    </fragment>
+
+</navigation>
