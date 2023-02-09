@@ -1,23 +1,27 @@
 package com.example.saharamusic.di
 
+import android.media.AudioAttributes
 import com.example.saharamusic.rest.ItunesAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ServiceScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     fun providesRetrofit(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ItunesAPI.BASE_URL)
@@ -47,4 +51,16 @@ class NetworkModule {
     fun providesItunesAPI(retrofit: Retrofit) : ItunesAPI {
         return retrofit.create(ItunesAPI::class.java)
     }
+
+//    @ServiceScoped
+//    fun providesAudioAtributes() : AudioAttributes =
+//        AudioAttributes.Builder()
+//            .setContentType(C.CON)
+//
+//    fun providesExoPlayer(
+//        @ApplicationContext context: ApplicationContext,
+//        audioAttributes: AudioAttributes
+//    ) {
+//
+//    }
 }

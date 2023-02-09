@@ -23,13 +23,21 @@ class SaharaViewModel @Inject constructor(
 
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val genres = arrayListOf("house")
+    private var isInitialized = false
+    var songUri : String = ""
 
 
     private val _houseSongs : MutableLiveData<UIState<SongResponse>> = MutableLiveData(UIState.LOADING)
     val houseSongs : MutableLiveData<UIState<SongResponse>> get() = _houseSongs
 
+//    private val _rockSongs : MutableLiveData<UIState<SongResponse>> = MutableLiveData(UIState.LOADING)
+//    val rockSongs : MutableLiveData<UIState<SongResponse>> get() = _rockSongs
+
     init {
-        getSongs()
+        if (!isInitialized) {
+            getSongs()
+            isInitialized = true
+        }
     }
 
     private fun getSongs() {
