@@ -15,6 +15,12 @@ data class Song(
     val trackName: String? = null,
     @SerializedName("trackPrice")
     val trackPrice: Double? = null,
+    @SerializedName("collectionPrice")
+    val collectionPrice: Double? = null,
+    @SerializedName("trackId")
+    val trackId: Long? = null,
+    @SerializedName("trackTimeMillis")
+    val trackTimeMillis: Long? = null,
     @SerializedName("previewUrl")
     val previewUrl: String? = null
 )

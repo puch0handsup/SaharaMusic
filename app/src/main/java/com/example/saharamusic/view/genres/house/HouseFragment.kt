@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.saharamusic.R
 import com.example.saharamusic.databinding.FragmentGenreCommonViewBinding
@@ -27,6 +28,8 @@ class HouseFragment : BaseFragment() {
     private val genresAdapter by lazy {
         GenresAdapter {
             Log.d(TAG, "Item Clicked. Preview URL: $it")
+            saharaViewModel.songUri = it
+            findNavController().navigate(R.id.action_house_fragment_to_exo_player_fragment)
         }
     }
 

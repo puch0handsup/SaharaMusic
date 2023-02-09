@@ -10,7 +10,7 @@ interface ItunesAPI {
 
     @GET(SEARCH)
     suspend fun getListByGenre(
-        @Query("term") term: String = "house",
+        @Query("term") term: String,
         @Query("amp;media", encoded = true) media: String = "music",
         @Query("amp;entity", encoded = true) entity: String = "song",
         @Query("amp;limit", encoded = true) limit: String = "50",

@@ -21,7 +21,7 @@ class SaharaRepositoryImpl @Inject constructor(
     override fun getListByGenre(term: String): Flow<UIState<SongResponse>> = flow {
         emit(UIState.LOADING)
         try {
-            var response = itunesAPI.getListByGenre()
+            var response = itunesAPI.getListByGenre(term)
             if (response.isSuccessful){
                 response.body()?.let {
                     Log.d(TAG, "getListByGenre: $it")
