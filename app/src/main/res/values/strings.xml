@@ -16,5 +16,9 @@
     <!-- Error messages -->
     <string name="error_media_not_found">Could not locate requested media.</string>
     <string name="generic_error">The application has encountered an unexpected error.</string>
+    <string name="reggaeton_menu">Reggaeton</string>
+    <string name="rock_menu">Rock</string>
+    <string name="pop_menu">Pop</string>
+    <string name="classic_menu">Classic</string>
     =
 </resources>
