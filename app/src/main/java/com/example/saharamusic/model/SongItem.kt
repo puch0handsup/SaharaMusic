@@ -2,9 +2,8 @@ package com.example.saharamusic.model
 
 
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.Url
 
-data class Song(
+data class SongItem(
     @SerializedName("artistName")
     val artistName: String? = null,
     @SerializedName("artworkUrl60")

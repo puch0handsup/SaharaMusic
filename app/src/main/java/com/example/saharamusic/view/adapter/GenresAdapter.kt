@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.saharamusic.R
 import com.example.saharamusic.databinding.RvSongItemBinding
-import com.example.saharamusic.model.Song
+import com.example.saharamusic.model.SongItem
 
 class GenresAdapter (
-    private val itemSet: MutableList<Song> = mutableListOf(),
+    private val itemSet: MutableList<SongItem> = mutableListOf(),
     private val onItemClick: (previewUrl: String) -> Unit
         ) : RecyclerView.Adapter<GenresViewModel>(){
 
-    fun updateItems(newItems: List<Song>) {
+    fun updateItems(newItems: List<SongItem>) {
         if (itemSet != newItems) {
             itemSet.clear()
             itemSet.addAll(newItems)
@@ -46,7 +46,7 @@ class GenresViewModel(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun Double.format(digits: Int) = "%.${digits}f".format(this)
 
-    fun bind(item: Song, onItemClick: (String) -> Unit) {
+    fun bind(item: SongItem, onItemClick: (String) -> Unit) {
         binding.ivAlbumItem.setImageResource(R.drawable.baseline_headphones_24)
         binding.tvArtistNameItem.text = item.artistName
         binding.tvSongNameItem.text = item.trackName ?: item.collectionName

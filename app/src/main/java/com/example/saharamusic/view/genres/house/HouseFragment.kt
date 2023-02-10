@@ -2,7 +2,6 @@ package com.example.saharamusic.view.genres.house
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.saharamusic.R
 import com.example.saharamusic.databinding.FragmentGenreCommonViewBinding
-import com.example.saharamusic.model.Song
 import com.example.saharamusic.model.SongResponse
 import com.example.saharamusic.utils.BaseFragment
 import com.example.saharamusic.utils.UIState
 import com.example.saharamusic.view.adapter.GenresAdapter
-import javax.inject.Inject
 
 private const val TAG = "HouseFragment"
 
