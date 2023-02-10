@@ -24,13 +24,11 @@ class SaharaRepositoryImpl @Inject constructor(
             var response = itunesAPI.getListByGenre(term)
             if (response.isSuccessful){
                 response.body()?.let {
-                    Log.d(TAG, "getListByGenre: $it")
                     emit(UIState.SUCCESS(it))
                 }?: throw NullSongsResponse()
             } else
                 throw FailureResponse(response.errorBody()?.string())
         }catch (e: Exception) {
-            Log.e(TAG, "getListByGenre: $e", )
             emit(UIState.ERROR(e))
         }
     }
