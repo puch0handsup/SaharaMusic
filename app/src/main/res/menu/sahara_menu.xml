@@ -5,4 +5,24 @@
         android:title="@string/house_menu"
         android:icon="@drawable/baseline_headphones_24">
     </item>
+    <item
+        android:id="@+id/rock_fragment"
+        android:title="@string/rock_menu"
+        android:icon="@drawable/baseline_bolt_24">
+    </item>
+    <item
+        android:id="@+id/pop_fragment"
+        android:title="@string/pop_menu"
+        android:icon="@drawable/baseline_insert_emoticon_24">
+    </item>
+    <item
+        android:id="@+id/classic_fragment"
+        android:title="@string/classic_menu"
+        android:icon="@drawable/baseline_wb_sunny_24">
+    </item>
+    <item
+        android:id="@+id/reggaeton_fragment"
+        android:title="@string/reggaeton_menu"
+        android:icon="@drawable/baseline_people_alt_24">
+    </item>
 </menu>

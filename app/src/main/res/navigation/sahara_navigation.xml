@@ -16,6 +16,46 @@
     </fragment>
 
     <fragment
+        android:id="@+id/rock_fragment"
+        android:name="com.example.saharamusic.view.genres.rock.RockFragment"
+        tools:layout="@layout/fragment_genre_common_view"
+        android:label="TOP 50 ROCK">
+        <action
+            android:id="@+id/action_rock_fragment_to_exo_player_fragment"
+            app:destination="@id/exo_player_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pop_fragment"
+        android:name="com.example.saharamusic.view.genres.pop.PopFragment"
+        tools:layout="@layout/fragment_genre_common_view"
+        android:label="TOP 50 POP">
+        <action
+            android:id="@+id/action_pop_fragment_to_exo_player_fragment"
+            app:destination="@id/exo_player_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/classic_fragment"
+        android:name="com.example.saharamusic.view.genres.classic.ClassicFragment"
+        tools:layout="@layout/fragment_genre_common_view"
+        android:label="TOP 50 CLASSIC">
+        <action
+            android:id="@+id/action_classic_fragment_to_exo_player_fragment"
+            app:destination="@id/exo_player_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reggaeton_fragment"
+        android:name="com.example.saharamusic.view.genres.reggaeton.ReggaetonFragment"
+        tools:layout="@layout/fragment_genre_common_view"
+        android:label="TOP 50 HOUSE">
+        <action
+            android:id="@+id/action_reggaeton_fragment_to_exo_player_fragment"
+            app:destination="@id/exo_player_fragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/exo_player_fragment"
         android:name="com.example.saharamusic.view.ExoPlayerFragment"
         tools:layout="@layout/fragment_exo_player"
