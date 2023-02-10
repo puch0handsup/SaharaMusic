@@ -16,11 +16,11 @@ import com.example.saharamusic.view.adapter.GenresAdapter
 
 class PopFragment : BaseFragment() {
 
-    val binding by lazy {
+    private val binding by lazy {
         FragmentGenreCommonViewBinding.inflate(layoutInflater)
     }
 
-    val genresAdapter by lazy {
+    private val genresAdapter by lazy {
         GenresAdapter {
             saharaViewModel.songUri = it
             findNavController().navigate(R.id.action_pop_fragment_to_exo_player_fragment)
@@ -41,21 +41,33 @@ class PopFragment : BaseFragment() {
             setHasFixedSize(true) // this is to see if it doesn't matter what happens to the
             adapter = genresAdapter
         }
-        saharaViewModel.popSongs.observe(viewLifecycleOwner) { state ->
-            when(state){
-                is UIState.LOADING -> {}
-                is UIState.SUCCESS<SongResponse> -> {
-                    genresAdapter.updateItems(state.response.results ?: emptyList())
-                }
-                is UIState.ERROR -> {
-                    showError(state.error.localizedMessage) {
 
-                    }
-                }
-            }
+        retrieveSongs()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            retrieveSongs()
         }
 
         return binding.root
     }
+
+    private fun retrieveSongs() {
+        saharaViewModel.popSongs.observe(viewLifecycleOwner) { state ->
+            when(state){
+                is UIState.LOADING -> { binding.swipeRefreshLayout.isRefreshing = true }
+                is UIState.SUCCESS<SongResponse> -> {
+                    hideSwipeAction()
+                    genresAdapter.updateItems(state.response.results ?: emptyList())
+                }
+                is UIState.ERROR -> {
+                    hideSwipeAction()
+                    showError(state.error.localizedMessage) {}
+                }
+            }
+        }
+    }
+
+    private fun hideSwipeAction() {
+        if (binding.swipeRefreshLayout.isRefreshing)
+            binding.swipeRefreshLayout.isRefreshing = false    }
 
 }

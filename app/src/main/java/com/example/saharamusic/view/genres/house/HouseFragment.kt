@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.saharamusic.R
 import com.example.saharamusic.databinding.FragmentGenreCommonViewBinding
 import com.example.saharamusic.model.SongResponse
@@ -45,23 +46,35 @@ class HouseFragment : BaseFragment() {
             adapter = genresAdapter
         }
         Log.d(TAG, "onCreateView: ")
+
+        retrieveSongs()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            retrieveSongs()
+        }
+
+        return binding.root
+    }
+
+    private fun retrieveSongs() {
         saharaViewModel.houseSongs.observe(viewLifecycleOwner) { state ->
             when(state){
-                is UIState.LOADING -> {}
+                is UIState.LOADING -> { binding.swipeRefreshLayout.isRefreshing = true }
                 is UIState.SUCCESS<SongResponse> -> {
                     Log.d(TAG, "onCreateView: ${state.response}")
+                    hideSwipeAction()
                     genresAdapter.updateItems(state.response.results ?: emptyList())
                 }
                 is UIState.ERROR -> {
-                    showError(state.error.localizedMessage) {
-
-                    }
+                    showError(state.error.localizedMessage) {}
+                    hideSwipeAction()
                 }
             }
         }
+    }
 
-
-        return binding.root
+    private fun hideSwipeAction() {
+        if (binding.swipeRefreshLayout.isRefreshing)
+            binding.swipeRefreshLayout.isRefreshing = false
     }
 
 }

@@ -41,21 +41,34 @@ class ClassicFragment : BaseFragment() {
             setHasFixedSize(true) // this is to see if it doesn't matter what happens to the
             adapter = genresAdapter
         }
-        saharaViewModel.classicSongs.observe(viewLifecycleOwner) { state ->
-            when(state){
-                is UIState.LOADING -> {}
-                is UIState.SUCCESS<SongResponse> -> {
-                    genresAdapter.updateItems(state.response.results ?: emptyList())
-                }
-                is UIState.ERROR -> {
-                    showError(state.error.localizedMessage) {
 
-                    }
-                }
-            }
+        retrieveSongs()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            retrieveSongs()
         }
 
         return binding.root
+    }
+
+    private fun retrieveSongs() {
+        saharaViewModel.classicSongs.observe(viewLifecycleOwner) { state ->
+            when(state){
+                is UIState.LOADING -> { binding.swipeRefreshLayout.isRefreshing = true }
+                is UIState.SUCCESS<SongResponse> -> {
+                    hideSwipeAction()
+                    genresAdapter.updateItems(state.response.results ?: emptyList())
+                }
+                is UIState.ERROR -> {
+                    showError(state.error.localizedMessage) {}
+                    hideSwipeAction()
+                }
+            }
+        }
+    }
+
+    private fun hideSwipeAction() {
+        if (binding.swipeRefreshLayout.isRefreshing)
+            binding.swipeRefreshLayout.isRefreshing = false
     }
 
 }
